@@ -1,8 +1,7 @@
 gsap.registerPlugin(ScrollTrigger);
+const sections = document.querySelectorAll('.rg__column');
 
 function initHoverReveal() {
-  const sections = document.querySelectorAll('.rg__column');
-
   sections.forEach((section) => {
     // Get elements for animation
     section.imageBlock = section.querySelector('.rg__image');
@@ -57,10 +56,48 @@ function createHoverReveal(e) {
   return tl;
 }
 
-function init() {
-  initHoverReveal();
+// function init() {
+//   initHoverReveal();
+// }
+
+// window.addEventListener('load', function () {
+//   init();
+// });
+
+// Define a breakpoint
+const mq = window.matchMedia('(min-width: 768px');
+
+// Add change listener to this breakpoint
+mq.addEventListener('change', handleWidthChange);
+
+// First page load
+handleWidthChange(mq);
+
+// Reset all props
+function resetProps(elements) {
+  // Stop all tweens
+  gsap.killTweensOf('*');
+
+  //   Reset all inline styles added by GSAP
+  if (elements.length) {
+    elements.forEach((el) => {
+      el && gsap.set(el, { clearProps: 'all' });
+    });
+  }
 }
 
-window.addEventListener('load', function () {
-  init();
-});
+// Media query change
+function handleWidthChange(mq) {
+  if (mq.matches) {
+    initHoverReveal();
+  } else {
+    // Remove all event listeners on mobile
+    sections.forEach((section) => {
+      section.removeEventListener('mouseenter', createHoverReveal);
+      section.removeEventListener('mouseleave', createHoverReveal);
+
+      const { imageBlock, imageMask, text, textCopy, textMask } = section;
+      resetProps([imageBlock, imageMask, text, textCopy, textMask]);
+    });
+  }
+}
