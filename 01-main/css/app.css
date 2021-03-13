@@ -251,6 +251,7 @@ header h1 span {
 .hg__image--s {
   width: 13vw;
   padding-bottom: 19vw;
+  z-index: 2;
 }
 .hg__image img,
 .rg__image img,
