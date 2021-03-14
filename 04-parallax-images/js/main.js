@@ -40,9 +40,6 @@ function initPinSteps() {
   const updateBodyColor = (color) => {
     // gsap.to('.fill-background', { backgroundColor: color, ease: 'none' });
     document.documentElement.style.setProperty('--bcg-fill-color', color);
-    console.log(
-      document.documentElement.style.getPropertyValue('--bcg-fill-color')
-    );
   };
 
   gsap.utils.toArray('.stage').forEach((stage, index) => {
@@ -64,22 +61,9 @@ function initPinSteps() {
   });
 }
 
-function initGetColorPalette() {
-  const allImages = document.querySelectorAll('.stage img');
-
-  allImages.forEach((image) => {
-    const url = image.getAttribute('src');
-    // console.log(url);
-    const colorPalette = Vibrant.from(url)
-      .getPalette()
-      .then((palette) => console.log(palette));
-  });
-}
-
 function init() {
   initParallaxImages();
   initPinSteps();
-  initGetColorPalette();
 }
 
 window.addEventListener('load', function () {
