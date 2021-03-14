@@ -68,14 +68,6 @@ function initGetColorPalette() {
   const allImages = document.querySelectorAll('.stage img');
 
   allImages.forEach((image) => {
-    // image.addEventListener('load', function (e) {
-    //   //   let color, vibrant;
-    //   //   const url = image.getAttribute('src');
-
-    //   //   vibrant = new Vibrant(url);
-    //   console.log('Hello');
-    // });
-
     const url = image.getAttribute('src');
     // console.log(url);
     const colorPalette = Vibrant.from(url)
