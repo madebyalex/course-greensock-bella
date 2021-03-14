@@ -1,4 +1,5 @@
 gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(scrollTo);
 
 function initParallaxImages() {
   const allSections = gsap.utils.toArray('.with-parallax');
@@ -61,9 +62,28 @@ function initPinSteps() {
   });
 }
 
+function initScrollTo() {
+  gsap.utils.toArray('.fixed-nav a').forEach((link) => {
+    const target = link.getAttribute('href');
+
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      gsap.to(window, {
+        duration: 0.9,
+        scrollTo: {
+          y: target,
+          offsetY: 80,
+          ease: 'Power2.out',
+        },
+      });
+    });
+  });
+}
+
 function init() {
   initParallaxImages();
   initPinSteps();
+  initScrollTo();
 }
 
 window.addEventListener('load', function () {
