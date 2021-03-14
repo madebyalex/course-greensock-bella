@@ -37,6 +37,14 @@ function initPinSteps() {
     return vh;
   };
 
+  const updateBodyColor = (color) => {
+    // gsap.to('.fill-background', { backgroundColor: color, ease: 'none' });
+    document.documentElement.style.setProperty('--bcg-fill-color', color);
+    console.log(
+      document.documentElement.style.getPropertyValue('--bcg-fill-color')
+    );
+  };
+
   gsap.utils.toArray('.stage').forEach((stage, index) => {
     const navLinks = gsap.utils.toArray('.fixed-nav li');
 
@@ -49,14 +57,37 @@ function initPinSteps() {
         targets: navLinks[index],
         className: 'is-active',
       },
-      markers: true,
+      //   markers: true,
+      onEnter: () => updateBodyColor(stage.dataset.color),
+      onEnterBack: () => updateBodyColor(stage.dataset.color),
     });
+  });
+}
+
+function initGetColorPalette() {
+  const allImages = document.querySelectorAll('.stage img');
+
+  allImages.forEach((image) => {
+    // image.addEventListener('load', function (e) {
+    //   //   let color, vibrant;
+    //   //   const url = image.getAttribute('src');
+
+    //   //   vibrant = new Vibrant(url);
+    //   console.log('Hello');
+    // });
+
+    const url = image.getAttribute('src');
+    // console.log(url);
+    const colorPalette = Vibrant.from(url)
+      .getPalette()
+      .then((palette) => console.log(palette));
   });
 }
 
 function init() {
   initParallaxImages();
   initPinSteps();
+  initGetColorPalette();
 }
 
 window.addEventListener('load', function () {
