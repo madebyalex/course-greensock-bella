@@ -1,5 +1,4 @@
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(scrollTo);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 function initParallaxImages() {
   const allSections = gsap.utils.toArray('.with-parallax');
