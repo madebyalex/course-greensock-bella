@@ -27,6 +27,26 @@
 body {
   font: 16px/1.7 'Source Sans Pro', Helvetica, Helvetica Neue, Arial, sans-serif;
   color: var(--text-dark-color);
+  overflow-y: scroll;
+}
+
+/*  =GSAP Smooth Scrolling demo */
+#viewport {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#scroll-container {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 /* =Header */
