@@ -12,7 +12,7 @@ function initParallaxImages() {
       scrollTrigger: {
         trigger: section,
         start: 'top bottom',
-        scrub: true,
+        scrub: 0.8,
         // markers: true,
       },
     });
@@ -26,6 +26,7 @@ function initPinSteps() {
     endTrigger: '#stage4',
     end: 'center center',
     pin: true,
+    pinReparent: true,
     // markers: true,
   });
 
@@ -80,9 +81,9 @@ function initScrollTo() {
 }
 
 function init() {
-  // initParallaxImages();
-  // initPinSteps();
-  // initScrollTo();
+  initParallaxImages();
+  initPinSteps();
+  initScrollTo();
 }
 
 window.addEventListener('load', function () {
@@ -98,3 +99,16 @@ function setHeight() {
 }
 
 ScrollTrigger.addEventListener('refreshInit', setHeight);
+
+gsap.to(container, {
+  y: () => -(height - document.documentElement.clientHeight),
+  ease: 'none',
+  scrollTrigger: {
+    trigger: document.body,
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: 0.8,
+    invalidateOnRefresh: true,
+    // markers: true,
+  },
+});
